@@ -27,7 +27,7 @@ if pack = LanguagePack.detect(ARGV[0], ARGV[1])
   # vendor awesome-vm
   puts "-----> Extracting pre-compiled version of libuc4(49.1.2)"
   FileUtils.mkdir_p expand_to
-  `curl #{icu4c_build} -o - | tar -xz -C vendor/icu4c -f -`
+  `curl #{icu4c_build} -o - | tar -xz -C #{expand_to} -f -`
 
   pack.log("compile") do
     pack.compile
