@@ -8,7 +8,7 @@ require "language_pack"
 
 
 if pack = LanguagePack.detect(ARGV[0], ARGV[1])
-  expand_to   = "#{ARGV[0]}/vendor/icu4c"
+  expand_to   = "/app/vendor/icu4c"
   icu4c_build = "http://atmos-vulcan.herokuapp.com/output/bd2cd0eb-793f-4af9-b14d-7901b86affe4"
 
 
