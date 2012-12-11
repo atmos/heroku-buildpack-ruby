@@ -33,8 +33,9 @@ class LanguagePack::Ruby < LanguagePack::Base
     vars = {
       "LANG"     => "en_US.UTF-8",
       "PATH"     => default_path,
-      "LDFLAGS"  => "/app/vendor/icu4c/lib",
+      "LDFLAGS"  => "-L/app/vendor/icu4c/lib",
       "GEM_PATH" => slug_vendor_base,
+      "LD_LIBRARY_PATH"  => "/app/vendor/icu4c/lib:#{ENV['LD_LIBRARY_PATH']}",
     }
 
     ruby_version_jruby? ? vars.merge("JAVA_OPTS" => default_java_opts, "JRUBY_OPTS" => default_jruby_opts) : vars
