@@ -33,6 +33,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     vars = {
       "LANG"     => "en_US.UTF-8",
       "PATH"     => default_path,
+      "LDFLAGS"  => "/app/vendor/icu4c/lib",
       "GEM_PATH" => slug_vendor_base,
     }
 
