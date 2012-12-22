@@ -11,3 +11,17 @@ if pack = LanguagePack.detect(ARGV[0], ARGV[1])
     pack.compile
   end
 end
+
+puts "-----> Installing ffmpeg and friends"
+ffmpeg_dir    = "vendor/ffmpeg"
+ffmpeg_binary = "http://atmos-s3itch.s3.amazonaws.com/ffmpeg-heroku-cedar-0.0.2.tgz"
+FileUtils.mkdir_p ffmpeg_dir
+`curl #{ffmpeg_binary} -o - | tar -xz -C #{ffmpeg_dir} -f -`
+
+puts "-----> Adding environmental variables for ffmpeg to .profile.d/ruby.sh"
+FileUtils.mkdir_p "#{pack.build_path}/.profile.d"
+File.open("#{pack.build_path}/.profile.d/ruby.sh", "a") do |file|
+  file.puts "export PATH=\"vendor/ffmpeg/bin:\$PATH\""
+  file.puts "export LDFLAGS=\"-L vendor/ffmpeg/lib \$LDFLAGS\""
+  file.puts "export LD_LIBRARY_PATH=\"vendor/ffmpeg/lib:\$LD_LIBRARY_PATH\""
+end
